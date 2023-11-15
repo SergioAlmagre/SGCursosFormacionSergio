@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -117,6 +117,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="modificarCursoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modificarCursoForm.Designer.cs">
+      <DependentUpon>modificarCursoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="prueba.cs">
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InscripcionForm.resx">
       <DependentUpon>InscripcionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modificarCursoForm.resx">
+      <DependentUpon>modificarCursoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
