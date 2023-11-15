@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gestorcursosformacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALUMNOS">
+          <Key>
+            <PropertyRef Name="Id_Alumno" />
+          </Key>
+          <Property Name="Id_Alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dni" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Curso" Type="int" />
+          <Property Name="Foto" Type="image" />
+        </EntityType>
+        <EntityType Name="CURSOS">
+          <Key>
+            <PropertyRef Name="Id_Curso" />
+          </Key>
+          <Property Name="Id_Curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Curso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Horas" Type="int" Nullable="false" />
+          <Property Name="Familia" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Fecha_Inicio" Type="date" Nullable="false" />
+          <Property Name="Fecha_Fin" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADOS">
+          <Key>
+            <PropertyRef Name="Id_Estado" />
+          </Key>
+          <Property Name="Id_Estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FAMILIAS">
+          <Key>
+            <PropertyRef Name="Id_Familia" />
+          </Key>
+          <Property Name="Id_Familia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Familia" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="alumnos_fk_cur">
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="0..1" />
+          <End Role="ALUMNOS" Type="Self.ALUMNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSOS">
+              <PropertyRef Name="Id_Curso" />
+            </Principal>
+            <Dependent Role="ALUMNOS">
+              <PropertyRef Name="Curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cursos_fk_est">
+          <End Role="ESTADOS" Type="Self.ESTADOS" Multiplicity="1" />
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS">
+              <PropertyRef Name="Id_Estado" />
+            </Principal>
+            <Dependent Role="CURSOS">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cursos_fk_fam">
+          <End Role="FAMILIAS" Type="Self.FAMILIAS" Multiplicity="1" />
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAMILIAS">
+              <PropertyRef Name="Id_Familia" />
+            </Principal>
+            <Dependent Role="CURSOS">
+              <PropertyRef Name="Familia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestorcursosformacionModelStoreContainer">
+          <EntitySet Name="ALUMNOS" EntityType="Self.ALUMNOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CURSOS" EntityType="Self.CURSOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADOS" EntityType="Self.ESTADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAMILIAS" EntityType="Self.FAMILIAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="alumnos_fk_cur" Association="Self.alumnos_fk_cur">
+            <End Role="CURSOS" EntitySet="CURSOS" />
+            <End Role="ALUMNOS" EntitySet="ALUMNOS" />
+          </AssociationSet>
+          <AssociationSet Name="cursos_fk_est" Association="Self.cursos_fk_est">
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+            <End Role="CURSOS" EntitySet="CURSOS" />
+          </AssociationSet>
+          <AssociationSet Name="cursos_fk_fam" Association="Self.cursos_fk_fam">
+            <End Role="FAMILIAS" EntitySet="FAMILIAS" />
+            <End Role="CURSOS" EntitySet="CURSOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gestorcursosformacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ALUMNOS">
+          <Key>
+            <PropertyRef Name="Id_Alumno" />
+          </Key>
+          <Property Name="Id_Alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dni" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Curso" Type="Int32" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CURSOS" Relationship="Self.alumnos_fk_cur" FromRole="ALUMNOS" ToRole="CURSOS" />
+        </EntityType>
+        <EntityType Name="CURSOS">
+          <Key>
+            <PropertyRef Name="Id_Curso" />
+          </Key>
+          <Property Name="Id_Curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Horas" Type="Int32" Nullable="false" />
+          <Property Name="Familia" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Fin" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ALUMNOS" Relationship="Self.alumnos_fk_cur" FromRole="CURSOS" ToRole="ALUMNOS" />
+          <NavigationProperty Name="ESTADOS" Relationship="Self.cursos_fk_est" FromRole="CURSOS" ToRole="ESTADOS" />
+          <NavigationProperty Name="FAMILIAS" Relationship="Self.cursos_fk_fam" FromRole="CURSOS" ToRole="FAMILIAS" />
+        </EntityType>
+        <EntityType Name="ESTADOS">
+          <Key>
+            <PropertyRef Name="Id_Estado" />
+          </Key>
+          <Property Name="Id_Estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CURSOS" Relationship="Self.cursos_fk_est" FromRole="ESTADOS" ToRole="CURSOS" />
+        </EntityType>
+        <EntityType Name="FAMILIAS">
+          <Key>
+            <PropertyRef Name="Id_Familia" />
+          </Key>
+          <Property Name="Id_Familia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Familia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CURSOS" Relationship="Self.cursos_fk_fam" FromRole="FAMILIAS" ToRole="CURSOS" />
+        </EntityType>
+        <Association Name="alumnos_fk_cur">
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="0..1" />
+          <End Role="ALUMNOS" Type="Self.ALUMNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSOS">
+              <PropertyRef Name="Id_Curso" />
+            </Principal>
+            <Dependent Role="ALUMNOS">
+              <PropertyRef Name="Curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cursos_fk_est">
+          <End Role="ESTADOS" Type="Self.ESTADOS" Multiplicity="1" />
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS">
+              <PropertyRef Name="Id_Estado" />
+            </Principal>
+            <Dependent Role="CURSOS">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cursos_fk_fam">
+          <End Role="FAMILIAS" Type="Self.FAMILIAS" Multiplicity="1" />
+          <End Role="CURSOS" Type="Self.CURSOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAMILIAS">
+              <PropertyRef Name="Id_Familia" />
+            </Principal>
+            <Dependent Role="CURSOS">
+              <PropertyRef Name="Familia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestorcursosformacionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ALUMNOS" EntityType="Self.ALUMNOS" />
+          <EntitySet Name="CURSOS" EntityType="Self.CURSOS" />
+          <EntitySet Name="ESTADOS" EntityType="Self.ESTADOS" />
+          <EntitySet Name="FAMILIAS" EntityType="Self.FAMILIAS" />
+          <AssociationSet Name="alumnos_fk_cur" Association="Self.alumnos_fk_cur">
+            <End Role="CURSOS" EntitySet="CURSOS" />
+            <End Role="ALUMNOS" EntitySet="ALUMNOS" />
+          </AssociationSet>
+          <AssociationSet Name="cursos_fk_est" Association="Self.cursos_fk_est">
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+            <End Role="CURSOS" EntitySet="CURSOS" />
+          </AssociationSet>
+          <AssociationSet Name="cursos_fk_fam" Association="Self.cursos_fk_fam">
+            <End Role="FAMILIAS" EntitySet="FAMILIAS" />
+            <End Role="CURSOS" EntitySet="CURSOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gestorcursosformacionModelStoreContainer" CdmEntityContainer="gestorcursosformacionEntities">
+          <EntitySetMapping Name="ALUMNOS">
+            <EntityTypeMapping TypeName="gestorcursosformacionModel.ALUMNOS">
+              <MappingFragment StoreEntitySet="ALUMNOS">
+                <ScalarProperty Name="Id_Alumno" ColumnName="Id_Alumno" />
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CURSOS">
+            <EntityTypeMapping TypeName="gestorcursosformacionModel.CURSOS">
+              <MappingFragment StoreEntitySet="CURSOS">
+                <ScalarProperty Name="Id_Curso" ColumnName="Id_Curso" />
+                <ScalarProperty Name="Nombre_Curso" ColumnName="Nombre_Curso" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Familia" ColumnName="Familia" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha_Inicio" />
+                <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha_Fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOS">
+            <EntityTypeMapping TypeName="gestorcursosformacionModel.ESTADOS">
+              <MappingFragment StoreEntitySet="ESTADOS">
+                <ScalarProperty Name="Id_Estado" ColumnName="Id_Estado" />
+                <ScalarProperty Name="Nombre_Estado" ColumnName="Nombre_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAMILIAS">
+            <EntityTypeMapping TypeName="gestorcursosformacionModel.FAMILIAS">
+              <MappingFragment StoreEntitySet="FAMILIAS">
+                <ScalarProperty Name="Id_Familia" ColumnName="Id_Familia" />
+                <ScalarProperty Name="Nombre_Familia" ColumnName="Nombre_Familia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
