@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,31 +20,31 @@ namespace SGCursosFormacionSergio
 
         private void aLUMNOSBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            try
+
+            dsDBTableAdapters.ALUMNOSTableAdapter alumnos = new dsDBTableAdapters.ALUMNOSTableAdapter();
+            dsDB dsBDDatos = new dsDB();
+
+            alumnos.FillByDNI(dsBDDatos.ALUMNOS, dniTextBox.Text);
+            var maxIdBindingNavigator = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text);
+            var max = alumnos.MaxAlumnos_idAlumno();
+            
+
+
+            if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator)
             {
-
-                dsDBTableAdapters.ALUMNOSTableAdapter alumnos = new dsDBTableAdapters.ALUMNOSTableAdapter();
-
-                alumnos.FillByDNI(this.dsDB.ALUMNOS, dniTextBox.Text);
-
-                if (this.dsDB.ALUMNOS.Rows.Count > 0)
-                {
-                    // ESTO NO ES CORRECTO PORQUE NO PODRÍA MODIFICAR UN ALUMNO QUE YA EXISTE
-                    MessageBox.Show("El alumno ya existe");
-                    return;
-                }
-                else
-                {
-                    this.Validate();
-                    this.aLUMNOSBindingSource.EndEdit();
-                    this.tableAdapterManager.UpdateAll(this.dsDB);
-
-                    cargarDatos();
-                }
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                // ESTO NO ES CORRECTO PORQUE NO PODRÍA MODIFICAR UN ALUMNO QUE YA EXISTE
+                MessageBox.Show("DNI ya registrado en la base de datos");
+                return;
             }
+            else
+            {
+                this.Validate();
+                this.aLUMNOSBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.dsDB);
+
+                //cargarDatos();
+            }
+
         }
 
         private void administrarAlumnosForm_Load(object sender, EventArgs e)
@@ -52,8 +53,6 @@ namespace SGCursosFormacionSergio
             this.cURSOSTableAdapter.Fill(this.dsDB1.CURSOS);
             // TODO: esta línea de código carga datos en la tabla 'gestorcursosformacionDataSet.ALUMNOS' Puede moverla o quitarla según sea necesario.
             this.aLUMNOSTableAdapter.Fill(this.dsDB.ALUMNOS);
-           
-
         }
 
         private void btnCambiar_Click(object sender, EventArgs e)
@@ -62,7 +61,6 @@ namespace SGCursosFormacionSergio
             {
                 fotoPictureBox.Image = Image.FromFile(ofdCaratula.FileName);
             }
-           cargarDatos();
         }
 
         private void cargarDatos()
@@ -70,46 +68,56 @@ namespace SGCursosFormacionSergio
             this.aLUMNOSTableAdapter.Fill(this.dsDB.ALUMNOS);
         }
 
+
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             DialogResult rs = MessageBox.Show("¿Estás seguro?", "Eliminar el alumno", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (rs == DialogResult.Yes)
             {
+
+                dsDBTableAdapters.ALUMNOSTableAdapter alumnoAdapter = new dsDBTableAdapters.ALUMNOSTableAdapter();
+
+                dsDB alumnoConCurso = new dsDB();
+
+                // Check if the alumno has a related curso
+                bool alumnoHasCurso = false;
                 int idAlumno = this.dsDB.ALUMNOS[int.Parse(aLUMNOSBindingNavigator.PositionItem.Text) - 1].Id_Alumno;
+                if (alumnoAdapter.FillCursoByIdAlumno(idAlumno) != null)
+                {
+                    alumnoHasCurso = true;
+                };
 
-                // dsDBTableAdapters.alumnosTableAdapter ata = new dsDBTableAdapters.alumnosTableAdapter();
-                dsDBTableAdapters.CURSOSTableAdapter cursoAdapter = new dsDBTableAdapters.CURSOSTableAdapter();
-                cursoAdapter.FillByAlumnoId(dsDB.CURSOS, idAlumno);
-
-                dsDBTableAdapters.ALUMNOSTableAdapter alumno = new dsDBTableAdapters.ALUMNOSTableAdapter();
-
-
-                alumno.FillCursoByIdAlumno(idAlumno);
-
-                if (dsDB.ALUMNOS.Count > 0)
+                if (alumnoHasCurso)
                 {
                     MessageBox.Show("El alumno que quieres borrar tiene cursos pendientes, si lo borras la vas a liar parda");
                     rs = MessageBox.Show("¿Estás seguro?", "Eliminar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
                     if (rs == DialogResult.Yes)
                     {
-                        cursoAdapter.DeleteQueryByIdCurso(idAlumno);
-                        this.aLUMNOSTableAdapter.DeleteQueryByIdAlumno(idAlumno);
-                        this.aLUMNOSTableAdapter.Fill(this.dsDB.ALUMNOS);
+                        alumnoAdapter.DeleteByIdAlumno(idAlumno);
                         MessageBox.Show("Alumno borrado");
+                        alumnoHasCurso = false;
                         cargarDatos();
                     }
                 }
                 else
                 {
-                    this.aLUMNOSTableAdapter.DeleteQueryAlumno(idAlumno);
-                    this.aLUMNOSTableAdapter.Fill(this.dsDB.ALUMNOS);
+                    alumnoAdapter.DeleteByIdAlumno(idAlumno);
                     MessageBox.Show("Alumno borrado");
+                    alumnoHasCurso = false;
                     cargarDatos();
                 }
             }
 
         }
+
+        private void cargarCombo()
+        {
+            cboCurso.DataSource = dsDB1.CURSOS;
+        }
+
+        
     }
+    
 }
