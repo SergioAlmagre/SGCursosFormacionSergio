@@ -102,6 +102,12 @@
     <Compile Include="InscripcionForm.Designer.cs">
       <DependentUpon>InscripcionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModalInscripcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModalInscripcion.Designer.cs">
+      <DependentUpon>ModalInscripcion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InscripcionForm.resx">
       <DependentUpon>InscripcionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModalInscripcion.resx">
+      <DependentUpon>ModalInscripcion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="modificarCursoForm.resx">
       <DependentUpon>modificarCursoForm.cs</DependentUpon>
