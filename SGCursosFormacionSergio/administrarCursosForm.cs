@@ -47,12 +47,12 @@ namespace SGCursosFormacionSergio
             //SI EL CURSO ESTA TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO
             using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
             {
-                var idCurso = dsDB.CURSOS.Where(x => x.Nombre_Curso == dataGrid.CurrentRow.Cells[0].Value.ToString()).FirstOrDefault().Id_Curso; //OBTENEMOS EL ID DEL CURSO SELECCIONADO
+                var idCurso = (int)dataGrid.CurrentRow.Cells[0].Value; //OBTENEMOS EL ID DEL CURSO 
 
-                var estadoCurso = dsDB.CURSOS.Where(x => x.Nombre_Curso == dataGrid.CurrentRow.Cells[0].Value.ToString()).FirstOrDefault().Estado; //OBTENEMOS EL ESTADO DEL CURSO SELECCIONADO
+                var estadoCurso = dataGrid.CurrentRow.Cells[3].Value.ToString(); //OBTENEMOS EL ESTADO DEL CURSO SELECCIONADO
                 var alumnosCursando = dsDB.ALUMNOS.Count(x => x.Curso == idCurso); //OBTENEMOS EL NUMERO DE ALUMNOS QUE ESTAN CURSANDO EL CURSO SELECCIONADO
 
-                if (estadoCurso == 3 || estadoCurso == 4) //SI EL ESTADO DEL CURSO ES TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO 3 CANCELADO 4 TERMINADO
+                if (estadoCurso == "Terminado" || estadoCurso == "Cancelado") //SI EL ESTADO DEL CURSO ES TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO 3 CANCELADO 4 TERMINADO
                 {
                     MessageBox.Show("El curso seleccionado está terminado o cancelado, no se puede modificar", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -66,28 +66,46 @@ namespace SGCursosFormacionSergio
 
                         if (modificarCurso.ShowDialog() == DialogResult.Cancel)
                         {
+                            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+                            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
+                            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
+                            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
+                            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
+                            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
+                            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
 
-                            dataGrid.CurrentRow.Cells[0].Value = modificarCurso.nombreCurso;
-                            dataGrid.CurrentRow.Cells[1].Value = modificarCurso.horas;
-                            dataGrid.CurrentRow.Cells[2].Value = modificarCurso.estado;
-                            dataGrid.CurrentRow.Cells[3].Value = modificarCurso.fechaInicio;
-                            dataGrid.CurrentRow.Cells[4].Value = modificarCurso.fechaFin;
-                            cboFamilia.SelectedItem = modificarCurso.familia;
-                            
+                            dataGrid.CurrentRow.Cells[1].Value = modificarCurso.nombreCurso.ToString();
+                            dataGrid.CurrentRow.Cells[2].Value = modificarCurso.horas.ToString();
+                            dataGrid.CurrentRow.Cells[3].Value = modificarCurso.estado.ToString();
+                            dataGrid.CurrentRow.Cells[4].Value = modificarCurso.fechaInicio.ToString();
+                            dataGrid.CurrentRow.Cells[5].Value = modificarCurso.fechaFin.ToString();
+                            cboFamilia.SelectedItem = modificarCurso.familia.ToString();
                             cboFamilia_SelectedIndexChanged(sender, e);
                         }
+                        
                     }
                     else
                     {
                         modificarCursoForm modificarCurso = new modificarCursoForm();
-                        dataGrid.CurrentRow.Cells[0].Value = modificarCurso.nombreCurso;
-                        dataGrid.CurrentRow.Cells[1].Value = modificarCurso.horas;
-                        dataGrid.CurrentRow.Cells[2].Value = modificarCurso.estado;
-                        dataGrid.CurrentRow.Cells[3].Value = modificarCurso.fechaInicio;
-                        dataGrid.CurrentRow.Cells[4].Value = modificarCurso.fechaFin;
-                        cboFamilia.SelectedItem = modificarCurso.familia;
+                        if (modificarCurso.ShowDialog() == DialogResult.Cancel)
+                        {
+                            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+                            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
+                            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
+                            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
+                            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
+                            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
+                            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
 
-                        cboFamilia_SelectedIndexChanged(sender, e);
+                            dataGrid.CurrentRow.Cells[1].Value = modificarCurso.nombreCurso.ToString();
+                            dataGrid.CurrentRow.Cells[2].Value = modificarCurso.horas.ToString();
+                            dataGrid.CurrentRow.Cells[3].Value = modificarCurso.estado.ToString();
+                            dataGrid.CurrentRow.Cells[4].Value = modificarCurso.fechaInicio.ToString();
+                            dataGrid.CurrentRow.Cells[5].Value = modificarCurso.fechaFin.ToString();
+                            cboFamilia.SelectedItem = modificarCurso.familia.ToString();
+                            cboFamilia_SelectedIndexChanged(sender, e);
+                        }
+                       
                     }
                 }
             }
@@ -101,7 +119,7 @@ namespace SGCursosFormacionSergio
                 DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar el curso seleccionado?", "Eliminar curso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
-                    var idCurso = dsDB.CURSOS.Where(x => x.Nombre_Curso == dataGrid.CurrentRow.Cells[0].Value.ToString()).FirstOrDefault().Id_Curso;
+                    var idCurso =   (int)dataGrid.CurrentRow.Cells[0].Value;
 
                     var alumnosCursando = dsDB.ALUMNOS.Count(x => x.Curso == idCurso);
 
@@ -114,18 +132,29 @@ namespace SGCursosFormacionSergio
                             objDB.CURSOS.Remove(curso);
                             objDB.SaveChanges();
                             MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            cboFamilia_SelectedIndexChanged(sender, e);
+                            
 
                         }
                     }
                     else
                     {
 
-                        var curso = objDB.CURSOS.Where(x => x.Nombre_Curso == dataGrid.CurrentRow.Cells[0].Value.ToString()).FirstOrDefault();
-                        objDB.CURSOS.Remove(curso);
-                        objDB.SaveChanges();
-                        MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cboFamilia_SelectedIndexChanged(sender, e);
+                        idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+
+                        // Buscar el curso por su ID
+                        var curso = objDB.CURSOS.FirstOrDefault(x => x.Id_Curso == idCurso);
+
+                        if (curso != null)
+                        {
+                            objDB.CURSOS.Remove(curso);
+                            objDB.SaveChanges();
+                            MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("El curso no se encuentra en la base de datos", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
                     }
                 }
             }
@@ -134,8 +163,23 @@ namespace SGCursosFormacionSergio
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
+            // No mostramos un mensaje, simplemente abrimos el formulario modal
+            modificarCursoForm modificarCurso = new modificarCursoForm();
 
+            // Si el usuario hace clic en Cancelar en el formulario modal
+            if (modificarCurso.ShowDialog() == DialogResult.Cancel)
+            {
+            
+               
+
+                
+               
+
+                // Realizar otras acciones si es necesario
+                cboFamilia_SelectedIndexChanged(sender, e);
+            }
         }
+
 
         private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -146,35 +190,42 @@ namespace SGCursosFormacionSergio
         {
             using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
             {
-                var respuesta = from fam in objDB.FAMILIAS
-                                join cur in objDB.CURSOS on fam.Id_Familia equals cur.Familia
-                                join est in objDB.ESTADOS on cur.Estado equals est.Id_Estado
-                                where fam.Nombre_Familia == cboFamilia.SelectedItem.ToString()
-                                orderby cur.Fecha_Inicio descending
-                                select new
-                                {
-                                    Nombre_Curso = cur.Nombre_Curso,
-                                    Numero_Horas = cur.Horas,
-                                    Estado = est.Nombre_Estado,
-                                    Fecha_Inicio = cur.Fecha_Inicio,
-                                    Fecha_Fin = cur.Fecha_Fin,
-                                };
+                string nombreFamiliaSeleccionada = cboFamilia.SelectedItem?.ToString();
+                 
 
-                dataGrid.DataSource = respuesta.ToList();
-                if (respuesta.ToList().Count == 0)
+                if (nombreFamiliaSeleccionada != null)
                 {
-                    btnEliminar.Enabled = false;
-                    btnModificar.Enabled = false;
-                }
-                else
-                {
-                    btnEliminar.Enabled = true;
-                    btnModificar.Enabled = true;
+                    // Convertir el nombre de la familia antes de la consulta LINQ
+                    var respuesta = from fam in objDB.FAMILIAS
+                                    join cur in objDB.CURSOS on fam.Id_Familia equals cur.Familia
+                                    join est in objDB.ESTADOS on cur.Estado equals est.Id_Estado
+                                    orderby cur.Fecha_Inicio descending
+                                    where fam.Nombre_Familia == nombreFamiliaSeleccionada
+                                    select new
+                                    {
+                                        idCurso = cur.Id_Curso,
+                                        Nombre_Curso = cur.Nombre_Curso,
+                                        Numero_Horas = cur.Horas,
+                                        Estado = est.Nombre_Estado,
+                                        Fecha_Inicio = cur.Fecha_Inicio,
+                                        Fecha_Fin = cur.Fecha_Fin,
+                                    };
+
+
+                    dataGrid.DataSource = respuesta.ToList();
+                    dataGrid.Columns[0].Visible = false;
+                    if (respuesta.ToList().Count == 0)
+                    {
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                    }
+                    else
+                    {
+                        btnEliminar.Enabled = true;
+                        btnModificar.Enabled = true;
+                    }
                 }
             }
-
-
-
         }
     }
 }
