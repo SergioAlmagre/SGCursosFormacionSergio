@@ -39,7 +39,6 @@ namespace SGCursosFormacionSergio
                                     Email = alu.Email,
                                 };
 
-
                 if (!string.IsNullOrEmpty(txtDni.Text))
                 {
                     resultado = from res in resultado
@@ -74,20 +73,9 @@ namespace SGCursosFormacionSergio
                 ////Si quieres ocultar algunas columnas
                 dataGridInscripcion.Columns[0].Visible = false;
 
-
                 ////Si quieres cambiar el nombre de las columnas que se muestran
                 //dataGridView1.Columns[1].HeaderText = "Título de pelicula";
-                //dataGridView1.Columns[2].HeaderText = "Año";
-                //dataGridView1.Columns[3].HeaderText = "Director";
-                //dataGridView1.Columns[4].HeaderText = "Estilo";
-                //dataGridView1.Columns[5].HeaderText = "Fecha de alquiler";
-                //dataGridView1.Columns[6].HeaderText = "Apellido del socio";
-                //dataGridView1.Columns[7].HeaderText = "Nombre del socio";
-                //dataGridView1.Columns[8].HeaderText = "Categoría";
-
             }
-
-
         }
 
         private void btnInscribir_Click(object sender, EventArgs e)
@@ -115,25 +103,20 @@ namespace SGCursosFormacionSergio
                             // Realizar otras acciones si es necesario
                             dataGridInscripcion_SelectionChanged(sender, e);
                         }
-
                     }
                     else
                     {
                         MessageBox.Show("El alumno tiene algún curso en desarrollo y no puede inscribirse");
                         return;
                     }
-
                 }
             }
             else
             {
                 MessageBox.Show("No se ha seleccionado ningún alumno");
             }
-
-
         }
-
-            
+ 
         private void limpiarTodo()
         {
             txtNombre.Text = "";
@@ -150,7 +133,6 @@ namespace SGCursosFormacionSergio
             {
                 idAlumno = Convert.ToInt32(dataGridInscripcion.CurrentRow.Cells[0].Value);
             }
-            
         }
     }
 }

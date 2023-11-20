@@ -28,7 +28,7 @@ namespace SGCursosFormacionSergio
             {
                 if (this.MdiChildren[0].Name != "administrarAlumnosForm")
                 {
-                    DialogResult rs = MessageBox.Show("¿Do you wish open other windows?, You will lose your data", "Atention!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult rs = MessageBox.Show("¿Seguro que desea salir?, Puedes perder los datos si no has guardado", "Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
                         this.MdiChildren[0].Close();
@@ -54,7 +54,7 @@ namespace SGCursosFormacionSergio
             {
                 if (this.MdiChildren[0].Name != "administrarCursosForm")
                 {
-                    DialogResult rs = MessageBox.Show("¿Do you wish open other windows?, You will lose your data", "Atention!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult rs = MessageBox.Show("¿Seguro que desea salir?, Puedes perder los datos si no has guardado", "Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
                         this.MdiChildren[0].Close();
@@ -78,9 +78,9 @@ namespace SGCursosFormacionSergio
         {
             if (this.MdiChildren.Length > 0)
             {
-                if (this.MdiChildren[0].Name != "inscripcionForm")
+                if (this.MdiChildren[0].Name != "InscripcionForm")
                 {
-                    DialogResult rs = MessageBox.Show("¿Do you wish open other windows?, You will lose your data", "Atention!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult rs = MessageBox.Show("¿Seguro que desea salir?, Puedes perder los datos si no has guardado", "Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
                         this.MdiChildren[0].Close();
@@ -104,9 +104,9 @@ namespace SGCursosFormacionSergio
         {
             if (this.MdiChildren.Length > 0)
             {
-                if (this.MdiChildren[0].Name != "informesForm")
+                if (this.MdiChildren[0].Name != "InformesForm")
                 {
-                    DialogResult rs = MessageBox.Show("¿Do you wish open other windows?, You will lose your data", "Atention!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult rs = MessageBox.Show("¿Seguro que desea salir?, Puedes perder los datos si no has guardado", "Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
                         this.MdiChildren[0].Close();

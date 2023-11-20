@@ -20,19 +20,15 @@ namespace SGCursosFormacionSergio
 
         private void aLUMNOSBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-
             dsDBTableAdapters.ALUMNOSTableAdapter alumnos = new dsDBTableAdapters.ALUMNOSTableAdapter();
             dsDB dsBDDatos = new dsDB();
 
             alumnos.FillByDNI(dsBDDatos.ALUMNOS, dniTextBox.Text);
             var maxIdBindingNavigator = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text);
             var max = alumnos.MaxAlumnos_idAlumno();
-            
 
-
-            if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator)
+            if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator) //Comprueba que el alumno no exista
             {
-                // ESTO NO ES CORRECTO PORQUE NO PODRÍA MODIFICAR UN ALUMNO QUE YA EXISTE
                 MessageBox.Show("DNI ya registrado en la base de datos");
                 return;
             }
@@ -41,8 +37,6 @@ namespace SGCursosFormacionSergio
                 this.Validate();
                 this.aLUMNOSBindingSource.EndEdit();
                 this.tableAdapterManager.UpdateAll(this.dsDB);
-
-                //cargarDatos();
             }
 
         }
@@ -75,14 +69,13 @@ namespace SGCursosFormacionSergio
 
             if (rs == DialogResult.Yes)
             {
-
                 dsDBTableAdapters.ALUMNOSTableAdapter alumnoAdapter = new dsDBTableAdapters.ALUMNOSTableAdapter();
-
                 dsDB alumnoConCurso = new dsDB();
 
                 // Check if the alumno has a related curso
                 bool alumnoHasCurso = false;
                 int idAlumno = this.dsDB.ALUMNOS[int.Parse(aLUMNOSBindingNavigator.PositionItem.Text) - 1].Id_Alumno;
+
                 if (alumnoAdapter.FillCursoByIdAlumno(idAlumno) != null)
                 {
                     alumnoHasCurso = true;
@@ -109,7 +102,6 @@ namespace SGCursosFormacionSergio
                     cargarDatos();
                 }
             }
-
         }
 
         private void cargarCombo()

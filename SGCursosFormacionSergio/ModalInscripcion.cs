@@ -14,7 +14,6 @@ namespace SGCursosFormacionSergio
     {
         public int idAlumno { get; set; }
         
-
         public ModalInscripcion()
         {
             InitializeComponent();
@@ -25,19 +24,16 @@ namespace SGCursosFormacionSergio
             this.Validate();
             this.cURSOSBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.dsDB);
-
         }
 
         private void modalInscripcion_Load(object sender, EventArgs e)
         {
-            
             gestorcursosformacionEntities objDB = new gestorcursosformacionEntities();
              var alumnoSeleccionado = objDB.ALUMNOS.FirstOrDefault(x => x.Id_Alumno == idAlumno);
            
             // TODO: esta línea de código carga datos en la tabla 'dsDB.CURSOS' Puede moverla o quitarla según sea necesario.
             //this.cURSOSTableAdapter.Fill(this.dsDB.CURSOS);
             cargarCombo();
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

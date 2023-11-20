@@ -26,8 +26,6 @@ namespace SGCursosFormacionSergio
             cargarComboFamilia();
             btnEliminar.Enabled = false;
             btnModificar.Enabled = false;
-
-
         }
 
         public void cargarComboFamilia()
@@ -74,7 +72,6 @@ namespace SGCursosFormacionSergio
 
                         if (modificarCurso.ShowDialog() == DialogResult.Cancel)
                         {
-
                             cboFamilia.SelectedItem = modificarCurso.familia.ToString();
                             cboFamilia_SelectedIndexChanged(sender, e);
                         }
@@ -96,7 +93,6 @@ namespace SGCursosFormacionSergio
                             cboFamilia.SelectedItem = modificarCurso.familia.ToString();
                             cboFamilia_SelectedIndexChanged(sender, e);
                         }
-                       
                     }
                 }
             }
@@ -122,12 +118,11 @@ namespace SGCursosFormacionSergio
                             objDB.CURSOS.Remove(curso);
                             objDB.SaveChanges();
                             MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         }
                     }
                     else
                     {
-
+                        // Obtener el ID del curso seleccionado
                         idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
 
                         // Buscar el curso por su ID
@@ -143,7 +138,6 @@ namespace SGCursosFormacionSergio
                         {
                             MessageBox.Show("El curso no se encuentra en la base de datos", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-
                     }
                 }
             }
@@ -176,7 +170,6 @@ namespace SGCursosFormacionSergio
             {
                 string nombreFamiliaSeleccionada = cboFamilia.SelectedItem?.ToString();
                  
-
                 if (nombreFamiliaSeleccionada != null)
                 {
                     // Convertir el nombre de la familia antes de la consulta LINQ

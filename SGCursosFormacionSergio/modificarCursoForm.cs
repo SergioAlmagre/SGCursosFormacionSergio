@@ -155,7 +155,6 @@ namespace SGCursosFormacionSergio
                 {
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             Close();
         }
@@ -176,8 +175,6 @@ namespace SGCursosFormacionSergio
 
            cargarCombos();
         }
-
-
 
         private void cargarCombos()
         {
@@ -212,36 +209,29 @@ namespace SGCursosFormacionSergio
 
                     cboFamilia.Text = familia;
                     cboEstado.Text = estado;
-
                 }
                 else
                 {
-
                     // Agregar elemento requerido por ejercicio cuando el curso es nuevo
                     var estadoInscripcion = objDB.ESTADOS.Where(x => x.Nombre_Estado == "Inscripción").FirstOrDefault();
                     cboEstado.Items.Add(estadoInscripcion.Nombre_Estado);
 
-                foreach (var familia in familias.OrderBy(x => x.Nombre_Familia))
-                {
-                    cboFamilia.Items.Add(familia.Nombre_Familia);
-                }
+                    foreach (var familia in familias.OrderBy(x => x.Nombre_Familia))
+                    {
+                        cboFamilia.Items.Add(familia.Nombre_Familia);
+                    }
 
-                foreach (var curso in cursos.OrderBy(x => x.Nombre_Curso))
-                {
-                    // Formato personalizado para mostrar la fecha
-                    string formattedDateInicio = curso.Fecha_Inicio.ToString("dddd, d 'de' MMMM 'de' yyyy");
-                    string formattedDateFin = curso.Fecha_Fin.ToString("dddd, d 'de' MMMM 'de' yyyy");
+                    foreach (var curso in cursos.OrderBy(x => x.Nombre_Curso))
+                    {
+                        // Formato personalizado para mostrar la fecha
+                        string formattedDateInicio = curso.Fecha_Inicio.ToString("dddd, d 'de' MMMM 'de' yyyy");
+                        string formattedDateFin = curso.Fecha_Fin.ToString("dddd, d 'de' MMMM 'de' yyyy");
 
-                    cboFechaInicio.Items.Add(formattedDateInicio); // Agregar la fecha de inicio
-                    cboFechaFin.Items.Add(formattedDateFin); // Agregar la fecha de fin
-                }
-
+                        cboFechaInicio.Items.Add(formattedDateInicio); // Agregar la fecha de inicio
+                        cboFechaFin.Items.Add(formattedDateFin); // Agregar la fecha de fin
+                    }
                 }  
             }
         }
-
-
-
-
     }
 }
