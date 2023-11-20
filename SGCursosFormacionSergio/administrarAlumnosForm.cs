@@ -53,6 +53,7 @@ namespace SGCursosFormacionSergio
                         this.Validate();
                         this.aLUMNOSBindingSource.EndEdit();
                         this.tableAdapterManager.UpdateAll(this.dsDB);
+                        MessageBox.Show("Alumno guardado");
                     }
 
                 }
