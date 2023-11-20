@@ -22,8 +22,6 @@ namespace SGCursosFormacionSergio
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             limpiarTodo();
-
-
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
