@@ -5,7 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +15,9 @@ namespace SGCursosFormacionSergio
 {
     public partial class administrarAlumnosForm : Form
     {
+        string expression = "";
+        string str = "";
+        Regex regExp;
         public administrarAlumnosForm()
         {
             InitializeComponent();
@@ -23,22 +28,43 @@ namespace SGCursosFormacionSergio
             dsDBTableAdapters.ALUMNOSTableAdapter alumnos = new dsDBTableAdapters.ALUMNOSTableAdapter();
             dsDB dsBDDatos = new dsDB();
 
-            alumnos.FillByDNI(dsBDDatos.ALUMNOS, dniTextBox.Text);
-            var maxIdBindingNavigator = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text);
-            var max = alumnos.MaxAlumnos_idAlumno();
-
-            if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator) //Comprueba que el alumno no exista
+            expression = "\\A\\d{8}[-][TRWAGMYGFPDXBNJZSQVHLCKE]\\Z"; // Expresión regular para DNI
+            str = dniTextBox.Text.Trim();
+            regExp = new Regex(expression);
+            if (regExp.Match(str).Success)
             {
-                MessageBox.Show("DNI ya registrado en la base de datos");
-                return;
+
+                expression = "\\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\Z"; // Expresión regular para correo electrónico
+                str = emailTextBox.Text.Trim();
+                regExp = new Regex(expression);
+                if (regExp.Match(str).Success)
+                {
+                    alumnos.FillByDNI(dsBDDatos.ALUMNOS, dniTextBox.Text);
+                    var maxIdBindingNavigator = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text);
+                    var max = alumnos.MaxAlumnos_idAlumno();
+
+                    if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator) //Comprueba que el alumno no exista
+                    {
+                        MessageBox.Show("DNI ya registrado en la base de datos");
+                        return;
+                    }
+                    else
+                    {
+                        this.Validate();
+                        this.aLUMNOSBindingSource.EndEdit();
+                        this.tableAdapterManager.UpdateAll(this.dsDB);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("El formato del correo introducido es incorrecto!", "Vuelva a introducirlo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                } 
             }
             else
             {
-                this.Validate();
-                this.aLUMNOSBindingSource.EndEdit();
-                this.tableAdapterManager.UpdateAll(this.dsDB);
+                MessageBox.Show("El formato del DNI introducido es incorrecto!", "Siga el siguiente formato 12345678-Z", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-
         }
 
         private void administrarAlumnosForm_Load(object sender, EventArgs e)
