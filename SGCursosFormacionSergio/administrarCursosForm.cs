@@ -107,26 +107,36 @@ namespace SGCursosFormacionSergio
                 if (respuesta == DialogResult.Yes)
                 {
                     var idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-                    var alumnosCursando = dsDB.ALUMNOS.Count(x => x.Curso == idCurso);
 
-                    if (alumnosCursando != 0)
+                    var alumnosCursando = from alu in objDB.ALUMNOS
+                                          join cur in objDB.CURSOS on alu.Curso equals cur.Id_Curso
+                                          where cur.Id_Curso == idCurso
+                                          select alu;
+
+                    var cantidadAlumnos = alumnosCursando.Count();
+
+                    if (cantidadAlumnos > 0)
                     {
                         DialogResult respuesta2 = MessageBox.Show("El curso seleccionado tiene alumnos cursandolo", "¿Eliminar curso de todos modos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (respuesta2 == DialogResult.Yes)
                         {
-                            var curso = objDB.CURSOS.Where(x => x.Nombre_Curso == dataGrid.CurrentRow.Cells[0].Value.ToString()).FirstOrDefault();
+                            foreach (var alumno in alumnosCursando)
+                            {
+                               alumno.Curso = null;
+                            }
+
+                            var curso = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
                             objDB.CURSOS.Remove(curso);
                             objDB.SaveChanges();
-                            MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Curso eliminado correctamente", "Curso eliminado también de alumnos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            cboFamilia_SelectedIndexChanged(sender, e);
                         }
                     }
                     else
                     {
-                        // Obtener el ID del curso seleccionado
-                        idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
 
                         // Buscar el curso por su ID
-                        var curso = objDB.CURSOS.FirstOrDefault(x => x.Id_Curso == idCurso);
+                        var curso = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
 
                         if (curso != null)
                         {
