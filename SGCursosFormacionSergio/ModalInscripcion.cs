@@ -63,11 +63,11 @@ namespace SGCursosFormacionSergio
         {
             gestorcursosformacionEntities dsDB = new gestorcursosformacionEntities();
 
-            var cursos = dsDB.CURSOS;
-            var estados = dsDB.ESTADOS;
+            //var cursos = dsDB.CURSOS;
+            //var estados = dsDB.ESTADOS;
 
-            var cursosInscripcion = from cur in cursos
-                                    join est in estados on cur.Estado equals est.Id_Estado
+            var cursosInscripcion = from cur in dsDB.CURSOS
+                                    join est in dsDB.ESTADOS on cur.Estado equals est.Id_Estado
                                     where est.Nombre_Estado == "Inscripción"
                                     select new
                                     {

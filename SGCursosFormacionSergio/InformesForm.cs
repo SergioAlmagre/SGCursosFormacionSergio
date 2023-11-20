@@ -51,21 +51,20 @@ namespace SGCursosFormacionSergio
             gestorcursosformacionEntities objDB = new gestorcursosformacionEntities();
             var cursos = objDB.CURSOS.ToList();
             var familias = objDB.FAMILIAS.ToList();
-            var cursosPorFamilia = new List<CURSOS>();
-            foreach (var familia in familias)
-            {
-                var cursosPorFamiliaActual = cursos.Where(x => x.Familia == familia.Id_Familia).ToList();
-                if (cursosPorFamiliaActual.Count > 0)
-                {
-                    cursosPorFamilia.AddRange(cursosPorFamiliaActual);
-                }
-            }
-            var cursosPorFamiliaOrdenados = cursosPorFamilia.OrderByDescending(x => x.Familia).ToList();
-            var familiaMasCursos = cursosPorFamiliaOrdenados.Take(1).ToList();
-            
-            dataGridView1.DataSource = familiaMasCursos;
-            ocultarColumnas();
-                
+
+            var idFamilaMasRepetida = cursos
+                                    .GroupBy(x => x.Familia)
+                                    .OrderByDescending(g => g.Count())
+                                    .Select(g => g.Key)
+                                    .FirstOrDefault();
+
+            var solucion = from fam in familias
+                           where fam.Id_Familia == idFamilaMasRepetida
+                           select fam;
+
+            dataGridView1.DataSource = solucion.ToList();
+            dataGridView1.Columns["CURSOS"].Visible = false;
+
         }
         private void ocultarColumnas()
         {
