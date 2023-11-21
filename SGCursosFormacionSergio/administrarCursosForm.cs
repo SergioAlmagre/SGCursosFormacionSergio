@@ -13,6 +13,7 @@ namespace SGCursosFormacionSergio
 {
     public partial class administrarCursosForm : Form
     {
+        public int idCurso = 0;
         public administrarCursosForm()
         {
             InitializeComponent();
@@ -44,57 +45,68 @@ namespace SGCursosFormacionSergio
         {
             //SI EL CURSO ESTA TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO
             using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
-            {
-                var idCurso = (int)dataGrid.CurrentRow.Cells[0].Value; //OBTENEMOS EL ID DEL CURSO 
-
-                var estadoCurso = dataGrid.CurrentRow.Cells[3].Value.ToString(); //OBTENEMOS EL ESTADO DEL CURSO SELECCIONADO
-                var alumnosCursando = dsDB.ALUMNOS.Count(x => x.Curso == idCurso); //OBTENEMOS EL NUMERO DE ALUMNOS QUE ESTAN CURSANDO EL CURSO SELECCIONADO
-
-                if (estadoCurso == "Terminado" || estadoCurso == "Cancelado") //SI EL ESTADO DEL CURSO ES TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO 3 CANCELADO 4 TERMINADO
+            { 
+                if(dataGrid.CurrentRow == null)
                 {
-                    MessageBox.Show("El curso seleccionado está terminado o cancelado, no se puede modificar", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No hay ningún curso seleccionado", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
                 else
                 {
-                    modificarCursoForm modificarCurso = new modificarCursoForm();
+                    var estadoCurso = dataGrid.CurrentRow.Cells[3].Value.ToString(); //OBTENEMOS EL ESTADO DEL CURSO SELECCIONADO
+                    var alumnosCursando = objDB.ALUMNOS.Count(x => x.Curso == idCurso); //OBTENEMOS EL NUMERO DE ALUMNOS QUE ESTAN CURSANDO EL CURSO SELECCIONADO
 
-                    if (alumnosCursando != 0)
+
+                    if (estadoCurso == "Terminado" || estadoCurso == "Cancelado") //SI EL ESTADO DEL CURSO ES TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO 3 CANCELADO 4 TERMINADO
                     {
-                        DialogResult respuesta = MessageBox.Show("El curso seleccionado tiene alumnos cursandolo", "¿Modificar curso de todos modos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-                        modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
-                        modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
-                        modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
-                        modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
-                        modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
-                        modificarCurso.familia = cboFamilia.SelectedItem.ToString();
-
-                        if (modificarCurso.ShowDialog() == DialogResult.Cancel)
-                        {
-                            cboFamilia.SelectedItem = modificarCurso.familia.ToString();
-                            cboFamilia_SelectedIndexChanged(sender, e);
-                        }
-                        
+                        MessageBox.Show("El curso seleccionado está terminado o cancelado, no se puede modificar", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        modificarCursoForm modificarCurso = new modificarCursoForm();
 
-                        modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-                        modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
-                        modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
-                        modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
-                        modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
-                        modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
-                        modificarCurso.familia = cboFamilia.SelectedItem.ToString();
-
-                        if (modificarCurso.ShowDialog() == DialogResult.Cancel)
+                        if (alumnosCursando != 0)
                         {
-                            cboFamilia.SelectedItem = modificarCurso.familia.ToString();
-                            cboFamilia_SelectedIndexChanged(sender, e);
+                            DialogResult respuesta = MessageBox.Show("El curso seleccionado tiene alumnos cursandolo", "¿Modificar curso de todos modos?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if(respuesta == DialogResult.Yes)
+                            {
+                                modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+                                modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
+                                modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
+                                modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
+                                modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
+                                modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
+                                modificarCurso.familia = cboFamilia.SelectedItem.ToString();
+
+                                if (modificarCurso.ShowDialog() == DialogResult.Cancel)
+                                {
+                                    cboFamilia.SelectedItem = modificarCurso.familia.ToString();
+                                    cboFamilia_SelectedIndexChanged(sender, e);
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+
+                            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+                            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
+                            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
+                            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
+                            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
+                            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
+                            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
+
+                            if (modificarCurso.ShowDialog() == DialogResult.Cancel)
+                            {
+                                cboFamilia.SelectedItem = modificarCurso.familia.ToString();
+                                cboFamilia_SelectedIndexChanged(sender, e);
+                            }
                         }
                     }
                 }
+                
             }
         }
 
@@ -213,6 +225,23 @@ namespace SGCursosFormacionSergio
                     }
                 }
             }
+        }
+
+        private void dataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            idCurso = (int)dataGrid.CurrentRow.Cells[0].Value; //OBTENEMOS EL ID DEL CURSO
+        }
+
+        private void cargarFormularioModal()
+        {
+            modificarCursoForm modificarCurso = new modificarCursoForm();
+            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
+            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
+            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
+            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
+            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
+            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
         }
     }
 }

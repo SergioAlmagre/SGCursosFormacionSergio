@@ -19,7 +19,7 @@ namespace SGCursosFormacionSergio
 
         private void mnuSalir_Click(object sender, EventArgs e)
         {
-            this.Close();  
+            Application.Exit(); 
         }
 
         private void sMenuAlumnos_Click(object sender, EventArgs e)

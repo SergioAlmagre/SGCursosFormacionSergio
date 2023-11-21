@@ -69,10 +69,10 @@
             // 
             // btnAñadir
             // 
-            this.btnAñadir.Location = new System.Drawing.Point(153, 341);
-            this.btnAñadir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAñadir.Location = new System.Drawing.Point(204, 420);
+            this.btnAñadir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(103, 30);
+            this.btnAñadir.Size = new System.Drawing.Size(137, 37);
             this.btnAñadir.TabIndex = 0;
             this.btnAñadir.Text = "AÑADIR";
             this.btnAñadir.UseVisualStyleBackColor = true;
@@ -80,10 +80,10 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(562, 341);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEliminar.Location = new System.Drawing.Point(749, 420);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(103, 30);
+            this.btnEliminar.Size = new System.Drawing.Size(137, 37);
             this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "ELIMINAR";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -91,10 +91,10 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(345, 341);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModificar.Location = new System.Drawing.Point(460, 420);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(103, 30);
+            this.btnModificar.Size = new System.Drawing.Size(137, 37);
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "MODIFICAR";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -106,22 +106,22 @@
             this.dataGrid.AllowUserToDeleteRows = false;
             this.dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGrid.ColumnHeadersHeight = 29;
-            this.dataGrid.Location = new System.Drawing.Point(61, 90);
-            this.dataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGrid.Location = new System.Drawing.Point(81, 111);
+            this.dataGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.ReadOnly = true;
             this.dataGrid.RowHeadersWidth = 51;
             this.dataGrid.RowTemplate.Height = 24;
             this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGrid.Size = new System.Drawing.Size(667, 223);
+            this.dataGrid.Size = new System.Drawing.Size(889, 274);
             this.dataGrid.TabIndex = 3;
             this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
+            this.dataGrid.SelectionChanged += new System.EventHandler(this.dataGrid_SelectionChanged);
             // 
             // lblFamiliaProfesional
             // 
             this.lblFamiliaProfesional.AutoSize = true;
-            this.lblFamiliaProfesional.Location = new System.Drawing.Point(72, 36);
-            this.lblFamiliaProfesional.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFamiliaProfesional.Location = new System.Drawing.Point(96, 44);
             this.lblFamiliaProfesional.Name = "lblFamiliaProfesional";
             this.lblFamiliaProfesional.Size = new System.Drawing.Size(122, 16);
             this.lblFamiliaProfesional.TabIndex = 4;
@@ -130,18 +130,18 @@
             // cboFamilia
             // 
             this.cboFamilia.FormattingEnabled = true;
-            this.cboFamilia.Location = new System.Drawing.Point(215, 36);
-            this.cboFamilia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboFamilia.Location = new System.Drawing.Point(287, 44);
+            this.cboFamilia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboFamilia.Name = "cboFamilia";
-            this.cboFamilia.Size = new System.Drawing.Size(513, 21);
+            this.cboFamilia.Size = new System.Drawing.Size(683, 24);
             this.cboFamilia.TabIndex = 5;
             this.cboFamilia.SelectedIndexChanged += new System.EventHandler(this.cboFamilia_SelectedIndexChanged);
             // 
             // administrarCursosForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 397);
+            this.ClientSize = new System.Drawing.Size(1051, 489);
             this.Controls.Add(this.cboFamilia);
             this.Controls.Add(this.lblFamiliaProfesional);
             this.Controls.Add(this.dataGrid);
@@ -149,7 +149,7 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAñadir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "administrarCursosForm";
             this.Text = "administrarCursosForm";
             this.Load += new System.EventHandler(this.administrarCursosForm_Load);
