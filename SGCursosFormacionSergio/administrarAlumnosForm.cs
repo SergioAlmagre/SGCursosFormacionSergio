@@ -53,14 +53,14 @@ namespace SGCursosFormacionSergio
                         this.Validate();
                         this.aLUMNOSBindingSource.EndEdit();
                         this.tableAdapterManager.UpdateAll(this.dsDB);
-                        MessageBox.Show("Alumno guardado");
+                        MessageBox.Show("Alumno guardado o modificado");
                     }
 
                 }
                 else
                 {
                     MessageBox.Show("El formato del correo introducido es incorrecto!", "Vuelva a introducirlo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                } 
+                }
             }
             else
             {
@@ -130,13 +130,5 @@ namespace SGCursosFormacionSergio
                 }
             }
         }
-
-        private void cargarCombo()
-        {
-            cboCurso.DataSource = dsDB1.CURSOS;
-        }
-
-        
     }
-    
 }
