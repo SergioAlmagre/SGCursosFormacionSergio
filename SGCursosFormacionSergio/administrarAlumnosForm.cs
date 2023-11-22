@@ -43,7 +43,7 @@ namespace SGCursosFormacionSergio
                     var maxIdBindingNavigator = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text);
                     var max = alumnos.MaxAlumnos_idAlumno();
 
-                    if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max <= maxIdBindingNavigator) //Comprueba que el alumno no exista
+                    if (dsBDDatos.ALUMNOS.Rows.Count > 0 && max < maxIdBindingNavigator) //Comprueba que el alumno no exista
                     {
                         MessageBox.Show("DNI ya registrado en la base de datos");
                         return;

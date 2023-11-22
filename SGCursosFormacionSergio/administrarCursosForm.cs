@@ -14,6 +14,7 @@ namespace SGCursosFormacionSergio
     public partial class administrarCursosForm : Form
     {
         public int idCurso = 0;
+        public CURSOS curso = null;
         public administrarCursosForm()
         {
             InitializeComponent();
@@ -63,7 +64,8 @@ namespace SGCursosFormacionSergio
                     }
                     else
                     {
-                        modificarCursoForm modificarCurso = new modificarCursoForm();
+                        var cursoSeleccionado = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
+                        modificarCursoForm modificarCurso = new modificarCursoForm(cursoSeleccionado);
 
                         if (alumnosCursando != 0)
                         {
@@ -71,17 +73,8 @@ namespace SGCursosFormacionSergio
 
                             if(respuesta == DialogResult.Yes)
                             {
-                                modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-                                modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
-                                modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
-                                modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
-                                modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
-                                modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
-                                modificarCurso.familia = cboFamilia.SelectedItem.ToString();
-
                                 if (modificarCurso.ShowDialog() == DialogResult.Cancel)
                                 {
-                                    cboFamilia.SelectedItem = modificarCurso.familia.ToString();
                                     cboFamilia_SelectedIndexChanged(sender, e);
                                 }
                             }
@@ -89,24 +82,13 @@ namespace SGCursosFormacionSergio
                         }
                         else
                         {
-
-                            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-                            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
-                            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
-                            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
-                            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
-                            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
-                            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
-
                             if (modificarCurso.ShowDialog() == DialogResult.Cancel)
                             {
-                                cboFamilia.SelectedItem = modificarCurso.familia.ToString();
                                 cboFamilia_SelectedIndexChanged(sender, e);
                             }
                         }
                     }
-                }
-                
+                }    
             }
         }
 
@@ -147,13 +129,14 @@ namespace SGCursosFormacionSergio
                     else
                     {
 
-                        // Buscar el curso por su ID
+                        // Instanciar el curso por su ID
                         var curso = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
 
                         if (curso != null)
                         {
                             objDB.CURSOS.Remove(curso);
                             objDB.SaveChanges();
+                            cboFamilia_SelectedIndexChanged(sender, e);
                             MessageBox.Show("Curso eliminado correctamente", "Eliminar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -169,7 +152,7 @@ namespace SGCursosFormacionSergio
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             // No mostramos un mensaje, simplemente abrimos el formulario modal
-            modificarCursoForm modificarCurso = new modificarCursoForm();
+            modificarCursoForm modificarCurso = new modificarCursoForm(null);
 
             // Si el usuario hace clic en Cancelar en el formulario modal
             if (modificarCurso.ShowDialog() == DialogResult.Cancel)
@@ -229,19 +212,29 @@ namespace SGCursosFormacionSergio
 
         private void dataGrid_SelectionChanged(object sender, EventArgs e)
         {
-            idCurso = (int)dataGrid.CurrentRow.Cells[0].Value; //OBTENEMOS EL ID DEL CURSO
+            using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
+            {
+                try
+                {
+                    if(dataGrid.CurrentRow.Cells[0].Value != null)
+                    {
+                        //OBTENEMOS EL ID DEL CURSO
+                        idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
+
+                        // Instanciar el curso por su ID
+                        curso = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
+
+                    }
+                 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ningún curso seleccionado" + ex.Message);
+                }
+                
+            }
+            
         }
 
-        private void cargarFormularioModal()
-        {
-            modificarCursoForm modificarCurso = new modificarCursoForm();
-            modificarCurso.idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
-            modificarCurso.nombreCurso = dataGrid.CurrentRow.Cells[1].Value.ToString();
-            modificarCurso.horas = (int)dataGrid.CurrentRow.Cells[2].Value;
-            modificarCurso.estado = dataGrid.CurrentRow.Cells[3].Value.ToString();
-            modificarCurso.fechaInicio = (DateTime)dataGrid.CurrentRow.Cells[4].Value;
-            modificarCurso.fechaFin = (DateTime)dataGrid.CurrentRow.Cells[5].Value;
-            modificarCurso.familia = cboFamilia.SelectedItem.ToString();
-        }
     }
 }
