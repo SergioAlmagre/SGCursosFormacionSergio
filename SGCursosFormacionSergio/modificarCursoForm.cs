@@ -20,7 +20,6 @@ namespace SGCursosFormacionSergio
         {
             InitializeComponent();
             this.cursoSeleccionado = cursoSeleccionado;
-
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
