@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,27 +23,23 @@ namespace SGCursosFormacionSergio
 
         }
 
-        public int idCurso { get; set; }
-        public string nombreCurso { get; set; }
-        public int horas { get; set; }
-        public DateTime fechaInicio { get; set; }
-        public DateTime fechaFin { get; set; }
-        public string familia { get; set; }
-        public string estado { get; set; }
-
-
-
-
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
             {
                 try
                 {
+                    // Validar que los campos nombre y horas no estén vacios
                     if (string.IsNullOrWhiteSpace(txtNombreCurso.Text) || string.IsNullOrWhiteSpace(txtHoras.Text))
                     {
                         MessageBox.Show("Debe rellenar todos los campos", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    // Validar que las horas sean solo números
+                    if (!EsNumero(txtHoras.Text))
+                    {
+                        MessageBox.Show("Las horas deben ser un número válido.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -51,23 +48,9 @@ namespace SGCursosFormacionSergio
                     // Asignar valores comunes
                     nuevoCurso.Nombre_Curso = txtNombreCurso.Text;
                     nuevoCurso.Horas = Convert.ToInt32(txtHoras.Text);
+                    nuevoCurso.Fecha_Inicio = dtpFechaInicio.Value;
+                    nuevoCurso.Fecha_Fin = dtpFechaFin.Value;
 
-                    // Manejar fechas
-                    if (!DateTime.TryParseExact(cboFechaInicio.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fechaInicio))
-                    {
-                        MessageBox.Show("Formato de fecha de inicio no válido. Utilice el formato dd/MM/yyyy.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    nuevoCurso.Fecha_Inicio = fechaInicio;
-
-                    if (!DateTime.TryParseExact(cboFechaFin.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fechaFin))
-                    {
-                        MessageBox.Show("Formato de fecha de fin no válido. Utilice el formato dd/MM/yyyy.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    nuevoCurso.Fecha_Fin = fechaFin;
 
                     // Asignar estado
                     var estadoSeleccionado = cboEstado.Text;
@@ -108,8 +91,8 @@ namespace SGCursosFormacionSergio
                         // Actualizar propiedades del curso existente con los valores del nuevo objeto
                         cursoExistente.Nombre_Curso = txtNombreCurso.Text;
                         cursoExistente.Horas = Convert.ToInt32(txtHoras.Text);
-                        cursoExistente.Fecha_Inicio = fechaInicio;
-                        cursoExistente.Fecha_Fin = fechaFin;
+                        cursoExistente.Fecha_Inicio = dtpFechaInicio.Value;
+                        cursoExistente.Fecha_Fin = dtpFechaFin.Value;
                         cursoExistente.ESTADOS = estadoEncontrado;
                         cursoExistente.FAMILIAS = familiaEncontrada;
 
@@ -166,8 +149,9 @@ namespace SGCursosFormacionSergio
 
                     txtNombreCurso.Text = cursoSeleccionado.Nombre_Curso;
                     txtHoras.Text = cursoSeleccionado.Horas.ToString();
-                    cboFechaInicio.Text = cursoSeleccionado.Fecha_Inicio.ToString("dd/MM/yyyy");
-                    cboFechaFin.Text = cursoSeleccionado.Fecha_Fin.ToString("dd/MM/yyyy");
+                    dtpFechaInicio.Value = cursoSeleccionado.Fecha_Inicio;
+                    dtpFechaFin.Value = cursoSeleccionado.Fecha_Fin;
+
 
                     var nombreFamiliaSeleccionada = objDB.FAMILIAS.Where(x => x.Id_Familia == cursoSeleccionado.Familia).FirstOrDefault().Nombre_Familia.ToString();
                     cboFamilia.Text = nombreFamiliaSeleccionada;
@@ -191,11 +175,20 @@ namespace SGCursosFormacionSergio
                         string formattedDateInicio = curso.Fecha_Inicio.ToString("dddd, d 'de' MMMM 'de' yyyy");
                         string formattedDateFin = curso.Fecha_Fin.ToString("dddd, d 'de' MMMM 'de' yyyy");
 
-                        cboFechaInicio.Items.Add(formattedDateInicio); // Agregar la fecha de inicio
-                        cboFechaFin.Items.Add(formattedDateFin); // Agregar la fecha de fin
+                        formattedDateInicio = dtpFechaInicio.Text; // Agregar la fecha de inicio
+                        formattedDateFin = dtpFechaFin.Text; // Agregar la fecha de fin
                     }
                 }
             }
         }
+
+
+        // Función para verificar si una cadena es un número
+        private bool EsNumero(string input)
+        {
+            return Regex.IsMatch(input, @"^\d+$");
+        }
+
+
     }
 }

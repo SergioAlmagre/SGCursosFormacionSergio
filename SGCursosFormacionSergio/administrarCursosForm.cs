@@ -57,7 +57,6 @@ namespace SGCursosFormacionSergio
                     var estadoCurso = dataGrid.CurrentRow.Cells[3].Value.ToString(); //OBTENEMOS EL ESTADO DEL CURSO SELECCIONADO
                     var alumnosCursando = objDB.ALUMNOS.Count(x => x.Curso == idCurso); //OBTENEMOS EL NUMERO DE ALUMNOS QUE ESTAN CURSANDO EL CURSO SELECCIONADO
 
-
                     if (estadoCurso == "Terminado" || estadoCurso == "Cancelado") //SI EL ESTADO DEL CURSO ES TERMINADO O CANCELADO MUESTRA UN MENSAJE DE AVISO Y  NO PERMITE MODIFICARLO 3 CANCELADO 4 TERMINADO
                     {
                         MessageBox.Show("El curso seleccionado está terminado o cancelado, no se puede modificar", "Modificar curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -152,6 +151,7 @@ namespace SGCursosFormacionSergio
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             // No mostramos un mensaje, simplemente abrimos el formulario modal
+
             modificarCursoForm modificarCurso = new modificarCursoForm(null);
 
             // Si el usuario hace clic en Cancelar en el formulario modal
@@ -193,7 +193,6 @@ namespace SGCursosFormacionSergio
                                         Fecha_Fin = cur.Fecha_Fin,
                                     };
 
-
                     dataGrid.DataSource = respuesta.ToList();
                     dataGrid.Columns[0].Visible = false;
                     if (respuesta.ToList().Count == 0)
@@ -216,25 +215,28 @@ namespace SGCursosFormacionSergio
             {
                 try
                 {
-                    if(dataGrid.CurrentRow.Cells[0].Value != null)
+                    // Verificar si hay una fila seleccionada
+                    if (dataGrid.CurrentRow != null)
                     {
-                        //OBTENEMOS EL ID DEL CURSO
+                        // Obtener el ID del curso
                         idCurso = (int)dataGrid.CurrentRow.Cells[0].Value;
 
                         // Instanciar el curso por su ID
-                        curso = objDB.CURSOS.Where(x => x.Id_Curso == idCurso).FirstOrDefault();
-
+                        curso = objDB.CURSOS.FirstOrDefault(x => x.Id_Curso == idCurso);
                     }
-                 
+                    else
+                    {
+                        // No hay una fila seleccionada, puedes manejar este caso según sea necesario
+                        MessageBox.Show("Ningún curso seleccionado");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ningún curso seleccionado" + ex.Message);
+                    MessageBox.Show("Error al seleccionar el curso: " + ex.Message);
                 }
-                
             }
-            
         }
+
 
     }
 }

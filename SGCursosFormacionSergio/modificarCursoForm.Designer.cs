@@ -41,8 +41,6 @@
             this.txtHoras = new System.Windows.Forms.TextBox();
             this.cboFamilia = new System.Windows.Forms.ComboBox();
             this.cboEstado = new System.Windows.Forms.ComboBox();
-            this.cboFechaInicio = new System.Windows.Forms.ComboBox();
-            this.cboFechaFin = new System.Windows.Forms.ComboBox();
             this.dsDB = new SGCursosFormacionSergio.dsDB();
             this.dsDBBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eSTADOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -53,6 +51,8 @@
             this.cURSOSBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fAMILIASBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fAMILIASTableAdapter = new SGCursosFormacionSergio.dsDBTableAdapters.FAMILIASTableAdapter();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dsDB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDBBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eSTADOSBindingSource)).BeginInit();
@@ -64,10 +64,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(218, 317);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGuardar.Location = new System.Drawing.Point(291, 390);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(92, 38);
+            this.btnGuardar.Size = new System.Drawing.Size(123, 47);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "GUARDAR";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -75,10 +75,10 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(457, 317);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Location = new System.Drawing.Point(609, 390);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(92, 38);
+            this.btnCancelar.Size = new System.Drawing.Size(123, 47);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -87,114 +87,90 @@
             // lblNombreCurso
             // 
             this.lblNombreCurso.AutoSize = true;
-            this.lblNombreCurso.Location = new System.Drawing.Point(84, 47);
-            this.lblNombreCurso.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNombreCurso.Location = new System.Drawing.Point(112, 58);
             this.lblNombreCurso.Name = "lblNombreCurso";
-            this.lblNombreCurso.Size = new System.Drawing.Size(93, 13);
+            this.lblNombreCurso.Size = new System.Drawing.Size(117, 16);
             this.lblNombreCurso.TabIndex = 2;
             this.lblNombreCurso.Text = "Nombre del curso:";
             // 
             // lblHoras
             // 
             this.lblHoras.AutoSize = true;
-            this.lblHoras.Location = new System.Drawing.Point(84, 89);
-            this.lblHoras.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHoras.Location = new System.Drawing.Point(112, 110);
             this.lblHoras.Name = "lblHoras";
-            this.lblHoras.Size = new System.Drawing.Size(38, 13);
+            this.lblHoras.Size = new System.Drawing.Size(47, 16);
             this.lblHoras.TabIndex = 3;
             this.lblHoras.Text = "Horas:";
             // 
             // lblFamilia
             // 
             this.lblFamilia.AutoSize = true;
-            this.lblFamilia.Location = new System.Drawing.Point(84, 132);
-            this.lblFamilia.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFamilia.Location = new System.Drawing.Point(112, 162);
             this.lblFamilia.Name = "lblFamilia";
-            this.lblFamilia.Size = new System.Drawing.Size(42, 13);
+            this.lblFamilia.Size = new System.Drawing.Size(54, 16);
             this.lblFamilia.TabIndex = 4;
             this.lblFamilia.Text = "Familia:";
             // 
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(84, 180);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEstado.Location = new System.Drawing.Point(112, 222);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(43, 13);
+            this.lblEstado.Size = new System.Drawing.Size(53, 16);
             this.lblEstado.TabIndex = 5;
             this.lblEstado.Text = "Estado:";
             // 
             // lblFechaInicio
             // 
             this.lblFechaInicio.AutoSize = true;
-            this.lblFechaInicio.Location = new System.Drawing.Point(84, 222);
-            this.lblFechaInicio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFechaInicio.Location = new System.Drawing.Point(112, 273);
             this.lblFechaInicio.Name = "lblFechaInicio";
-            this.lblFechaInicio.Size = new System.Drawing.Size(82, 13);
+            this.lblFechaInicio.Size = new System.Drawing.Size(101, 16);
             this.lblFechaInicio.TabIndex = 6;
             this.lblFechaInicio.Text = "Fecha de inicio:";
             // 
             // lblFechaFinal
             // 
             this.lblFechaFinal.AutoSize = true;
-            this.lblFechaFinal.Location = new System.Drawing.Point(84, 270);
-            this.lblFechaFinal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFechaFinal.Location = new System.Drawing.Point(112, 332);
             this.lblFechaFinal.Name = "lblFechaFinal";
-            this.lblFechaFinal.Size = new System.Drawing.Size(62, 13);
+            this.lblFechaFinal.Size = new System.Drawing.Size(75, 16);
             this.lblFechaFinal.TabIndex = 7;
             this.lblFechaFinal.Text = "Fecha final:";
             // 
             // txtNombreCurso
             // 
-            this.txtNombreCurso.Location = new System.Drawing.Point(218, 45);
-            this.txtNombreCurso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNombreCurso.Location = new System.Drawing.Point(291, 55);
+            this.txtNombreCurso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombreCurso.Name = "txtNombreCurso";
-            this.txtNombreCurso.Size = new System.Drawing.Size(332, 20);
+            this.txtNombreCurso.Size = new System.Drawing.Size(441, 22);
             this.txtNombreCurso.TabIndex = 8;
             // 
             // txtHoras
             // 
-            this.txtHoras.Location = new System.Drawing.Point(218, 89);
-            this.txtHoras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHoras.Location = new System.Drawing.Point(291, 110);
+            this.txtHoras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtHoras.Name = "txtHoras";
-            this.txtHoras.Size = new System.Drawing.Size(332, 20);
+            this.txtHoras.Size = new System.Drawing.Size(441, 22);
             this.txtHoras.TabIndex = 9;
             // 
             // cboFamilia
             // 
             this.cboFamilia.FormattingEnabled = true;
-            this.cboFamilia.Location = new System.Drawing.Point(218, 132);
-            this.cboFamilia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboFamilia.Location = new System.Drawing.Point(291, 162);
+            this.cboFamilia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboFamilia.Name = "cboFamilia";
-            this.cboFamilia.Size = new System.Drawing.Size(332, 21);
+            this.cboFamilia.Size = new System.Drawing.Size(441, 24);
             this.cboFamilia.TabIndex = 10;
             // 
             // cboEstado
             // 
             this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(218, 177);
-            this.cboEstado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboEstado.Location = new System.Drawing.Point(291, 218);
+            this.cboEstado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(332, 21);
+            this.cboEstado.Size = new System.Drawing.Size(441, 24);
             this.cboEstado.TabIndex = 11;
-            // 
-            // cboFechaInicio
-            // 
-            this.cboFechaInicio.FormattingEnabled = true;
-            this.cboFechaInicio.Location = new System.Drawing.Point(218, 219);
-            this.cboFechaInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cboFechaInicio.Name = "cboFechaInicio";
-            this.cboFechaInicio.Size = new System.Drawing.Size(332, 21);
-            this.cboFechaInicio.TabIndex = 12;
-            // 
-            // cboFechaFin
-            // 
-            this.cboFechaFin.FormattingEnabled = true;
-            this.cboFechaFin.Location = new System.Drawing.Point(218, 267);
-            this.cboFechaFin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cboFechaFin.Name = "cboFechaFin";
-            this.cboFechaFin.Size = new System.Drawing.Size(332, 21);
-            this.cboFechaFin.TabIndex = 13;
             // 
             // dsDB
             // 
@@ -243,13 +219,27 @@
             // 
             this.fAMILIASTableAdapter.ClearBeforeFill = true;
             // 
+            // dtpFechaInicio
+            // 
+            this.dtpFechaInicio.Location = new System.Drawing.Point(291, 268);
+            this.dtpFechaInicio.Name = "dtpFechaInicio";
+            this.dtpFechaInicio.Size = new System.Drawing.Size(441, 22);
+            this.dtpFechaInicio.TabIndex = 14;
+            // 
+            // dtpFechaFin
+            // 
+            this.dtpFechaFin.Location = new System.Drawing.Point(291, 327);
+            this.dtpFechaFin.Name = "dtpFechaFin";
+            this.dtpFechaFin.Size = new System.Drawing.Size(441, 22);
+            this.dtpFechaFin.TabIndex = 15;
+            // 
             // modificarCursoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 415);
-            this.Controls.Add(this.cboFechaFin);
-            this.Controls.Add(this.cboFechaInicio);
+            this.ClientSize = new System.Drawing.Size(873, 511);
+            this.Controls.Add(this.dtpFechaFin);
+            this.Controls.Add(this.dtpFechaInicio);
             this.Controls.Add(this.cboEstado);
             this.Controls.Add(this.cboFamilia);
             this.Controls.Add(this.txtHoras);
@@ -263,7 +253,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "modificarCursoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "modificarCursoForm";
@@ -294,8 +284,6 @@
         private System.Windows.Forms.TextBox txtHoras;
         private System.Windows.Forms.ComboBox cboFamilia;
         private System.Windows.Forms.ComboBox cboEstado;
-        private System.Windows.Forms.ComboBox cboFechaInicio;
-        private System.Windows.Forms.ComboBox cboFechaFin;
         private System.Windows.Forms.BindingSource dsDBBindingSource;
         private dsDB dsDB;
         private System.Windows.Forms.BindingSource eSTADOSBindingSource;
@@ -306,5 +294,7 @@
         private System.Windows.Forms.BindingSource cURSOSBindingSource1;
         private System.Windows.Forms.BindingSource fAMILIASBindingSource;
         private dsDBTableAdapters.FAMILIASTableAdapter fAMILIASTableAdapter;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicio;
+        private System.Windows.Forms.DateTimePicker dtpFechaFin;
     }
 }
