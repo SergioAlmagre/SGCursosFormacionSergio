@@ -204,6 +204,7 @@ namespace SGCursosFormacionSergio
                     {
                         btnEliminar.Enabled = true;
                         btnModificar.Enabled = true;
+                        
                     }
                 }
             }
@@ -235,6 +236,7 @@ namespace SGCursosFormacionSergio
                     MessageBox.Show("Error al seleccionar el curso: " + ex.Message);
                 }
             }
+
         }
 
 

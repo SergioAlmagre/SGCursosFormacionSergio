@@ -81,6 +81,9 @@ namespace SGCursosFormacionSergio
             if (ofdCaratula.ShowDialog() == DialogResult.OK)
             {
                 fotoPictureBox.Image = Image.FromFile(ofdCaratula.FileName);
+                this.Validate();
+                this.aLUMNOSBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.dsDB);
             }
         }
 
