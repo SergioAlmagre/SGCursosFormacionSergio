@@ -70,11 +70,11 @@ namespace SGCursosFormacionSergio
 
                 dataGridInscripcion.DataSource = resultado.ToList();
 
-                ////Si quieres ocultar algunas columnas
+                //Si quieres ocultar algunas columnas
                 dataGridInscripcion.Columns[0].Visible = false;
 
-                ////Si quieres cambiar el nombre de las columnas que se muestran
-                //dataGridView1.Columns[1].HeaderText = "Título de pelicula";
+                //Si quieres cambiar el nombre de las columnas que se muestran
+                //dataGridView1.Columns[1].HeaderText = "Nombre alumno";
             }
         }
 
@@ -84,10 +84,6 @@ namespace SGCursosFormacionSergio
             {
                 using (gestorcursosformacionEntities objDB = new gestorcursosformacionEntities())
                 {
-                    var alumnoSeleccionado = from alu in objDB.ALUMNOS
-                                             where alu.Id_Alumno == idAlumno
-                                             select alu;
-
                     var cursoEnDesarrollo = from cur in objDB.CURSOS
                                             join est in objDB.ESTADOS on cur.Estado equals est.Id_Estado
                                             join alu in objDB.ALUMNOS on cur.Id_Curso equals alu.Curso

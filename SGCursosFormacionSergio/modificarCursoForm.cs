@@ -50,9 +50,9 @@ namespace SGCursosFormacionSergio
                     nuevoCurso.Fecha_Inicio = dtpFechaInicio.Value;
                     nuevoCurso.Fecha_Fin = dtpFechaFin.Value;
 
-
-                    // Asignar estado
+                    // Proceso papra asignar estado(ojeto)
                     var estadoSeleccionado = cboEstado.Text;
+                    // Instanciamos el objeto estado
                     var estadoEncontrado = objDB.ESTADOS.FirstOrDefault(x => x.Nombre_Estado == estadoSeleccionado);
 
                     if (estadoEncontrado == null)
@@ -61,10 +61,12 @@ namespace SGCursosFormacionSergio
                         return;
                     }
 
+                    // Asignamos el objeto estado
                     nuevoCurso.ESTADOS = estadoEncontrado;
 
-                    // Asignar familia
+                    //Procesos para asignar familia(objeto)
                     var familiaSeleccionada = cboFamilia.Text;
+                    // Instanciamos el objeto familia
                     var familiaEncontrada = objDB.FAMILIAS.FirstOrDefault(x => x.Nombre_Familia == familiaSeleccionada);
 
                     if (familiaEncontrada == null)
@@ -72,7 +74,7 @@ namespace SGCursosFormacionSergio
                         MessageBox.Show($"La familia '{familiaSeleccionada}' no se encuentra en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
+                    // Asignamos el objeto familia
                     nuevoCurso.FAMILIAS = familiaEncontrada;
 
                     if(cursoSeleccionado == null)
@@ -84,7 +86,7 @@ namespace SGCursosFormacionSergio
                     }
                     else
                     {
-                        // Buscar el curso existente por su ID
+                        // Buscar e instanciar el curso existente por su ID para poder modificar sus valores (update)
                         CURSOS cursoExistente = objDB.CURSOS.Find(cursoSeleccionado.Id_Curso);
 
                         // Actualizar propiedades del curso existente con los valores del nuevo objeto
@@ -99,7 +101,6 @@ namespace SGCursosFormacionSergio
                         objDB.SaveChanges();
                         MessageBox.Show("Curso modificado correctamente");
                     }
-                    
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +152,6 @@ namespace SGCursosFormacionSergio
                     dtpFechaInicio.Value = cursoSeleccionado.Fecha_Inicio;
                     dtpFechaFin.Value = cursoSeleccionado.Fecha_Fin;
 
-
                     var nombreFamiliaSeleccionada = objDB.FAMILIAS.Where(x => x.Id_Familia == cursoSeleccionado.Familia).FirstOrDefault().Nombre_Familia.ToString();
                     cboFamilia.Text = nombreFamiliaSeleccionada;
                     var nombreEstadoSeleccionado = objDB.ESTADOS.Where(x => x.Id_Estado == cursoSeleccionado.Estado).FirstOrDefault().Nombre_Estado.ToString();
@@ -180,7 +180,6 @@ namespace SGCursosFormacionSergio
                 }
             }
         }
-
 
         // Función para verificar si una cadena es un número
         private bool EsNumero(string input)

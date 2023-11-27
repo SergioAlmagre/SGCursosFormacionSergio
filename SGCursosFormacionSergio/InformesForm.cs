@@ -64,8 +64,8 @@ namespace SGCursosFormacionSergio
 
             dataGridView1.DataSource = solucion.ToList();
             dataGridView1.Columns["CURSOS"].Visible = false;
-
         }
+
         private void ocultarColumnas()
         {
             dataGridView1.Columns["ALUMNOS"].Visible = false;

@@ -100,7 +100,6 @@ namespace SGCursosFormacionSergio
             if (rs == DialogResult.Yes)
             {
                 dsDBTableAdapters.ALUMNOSTableAdapter alumnoAdapter = new dsDBTableAdapters.ALUMNOSTableAdapter();
-                dsDB alumnoConCurso = new dsDB();
 
                 // Check if the alumno has a related curso
                 bool alumnoHasCurso = false;
@@ -120,7 +119,6 @@ namespace SGCursosFormacionSergio
                     {
                         alumnoAdapter.DeleteByIdAlumno(idAlumno);
                         MessageBox.Show("Alumno borrado");
-                        alumnoHasCurso = false;
                         cargarDatos();
                     }
                 }
@@ -128,7 +126,6 @@ namespace SGCursosFormacionSergio
                 {
                     alumnoAdapter.DeleteByIdAlumno(idAlumno);
                     MessageBox.Show("Alumno borrado");
-                    alumnoHasCurso = false;
                     cargarDatos();
                 }
             }
