@@ -88,54 +88,60 @@
             // dniLabel
             // 
             dniLabel.AutoSize = true;
-            dniLabel.Location = new System.Drawing.Point(36, 94);
+            dniLabel.Location = new System.Drawing.Point(27, 76);
+            dniLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             dniLabel.Name = "dniLabel";
-            dniLabel.Size = new System.Drawing.Size(30, 16);
+            dniLabel.Size = new System.Drawing.Size(26, 13);
             dniLabel.TabIndex = 3;
             dniLabel.Text = "Dni:";
             // 
             // nombreLabel
             // 
             nombreLabel.AutoSize = true;
-            nombreLabel.Location = new System.Drawing.Point(36, 122);
+            nombreLabel.Location = new System.Drawing.Point(27, 99);
+            nombreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             nombreLabel.Name = "nombreLabel";
-            nombreLabel.Size = new System.Drawing.Size(59, 16);
+            nombreLabel.Size = new System.Drawing.Size(47, 13);
             nombreLabel.TabIndex = 5;
             nombreLabel.Text = "Nombre:";
             // 
             // apellidosLabel
             // 
             apellidosLabel.AutoSize = true;
-            apellidosLabel.Location = new System.Drawing.Point(36, 150);
+            apellidosLabel.Location = new System.Drawing.Point(27, 122);
+            apellidosLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             apellidosLabel.Name = "apellidosLabel";
-            apellidosLabel.Size = new System.Drawing.Size(67, 16);
+            apellidosLabel.Size = new System.Drawing.Size(52, 13);
             apellidosLabel.TabIndex = 7;
             apellidosLabel.Text = "Apellidos:";
             // 
             // emailLabel
             // 
             emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(36, 178);
+            emailLabel.Location = new System.Drawing.Point(27, 145);
+            emailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(44, 16);
+            emailLabel.Size = new System.Drawing.Size(35, 13);
             emailLabel.TabIndex = 9;
             emailLabel.Text = "Email:";
             // 
             // cursoLabel
             // 
             cursoLabel.AutoSize = true;
-            cursoLabel.Location = new System.Drawing.Point(36, 206);
+            cursoLabel.Location = new System.Drawing.Point(27, 167);
+            cursoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             cursoLabel.Name = "cursoLabel";
-            cursoLabel.Size = new System.Drawing.Size(45, 16);
+            cursoLabel.Size = new System.Drawing.Size(37, 13);
             cursoLabel.TabIndex = 11;
             cursoLabel.Text = "Curso:";
             // 
             // fotoLabel
             // 
             fotoLabel.AutoSize = true;
-            fotoLabel.Location = new System.Drawing.Point(355, 54);
+            fotoLabel.Location = new System.Drawing.Point(266, 44);
+            fotoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             fotoLabel.Name = "fotoLabel";
-            fotoLabel.Size = new System.Drawing.Size(37, 16);
+            fotoLabel.Size = new System.Drawing.Size(31, 13);
             fotoLabel.TabIndex = 13;
             fotoLabel.Text = "Foto:";
             // 
@@ -166,7 +172,7 @@
             this.aLUMNOSBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.aLUMNOSBindingNavigator.Name = "aLUMNOSBindingNavigator";
             this.aLUMNOSBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.aLUMNOSBindingNavigator.Size = new System.Drawing.Size(575, 27);
+            this.aLUMNOSBindingNavigator.Size = new System.Drawing.Size(431, 27);
             this.aLUMNOSBindingNavigator.TabIndex = 0;
             this.aLUMNOSBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -176,7 +182,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
             // 
             // aLUMNOSBindingSource
@@ -192,7 +198,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(48, 24);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 24);
             this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
             // 
@@ -202,7 +208,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorMoveFirstItem.Text = "Mover primero";
             // 
             // bindingNavigatorMovePreviousItem
@@ -211,7 +217,7 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorMovePreviousItem.Text = "Mover anterior";
             // 
             // bindingNavigatorSeparator
@@ -225,7 +231,7 @@
             this.bindingNavigatorPositionItem.AutoSize = false;
             this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 27);
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(38, 23);
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
             // 
@@ -240,7 +246,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorMoveNextItem.Text = "Mover siguiente";
             // 
             // bindingNavigatorMoveLastItem
@@ -249,7 +255,7 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
             // 
             // bindingNavigatorSeparator2
@@ -263,7 +269,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorDeleteItem.Text = "Eliminar";
             this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
@@ -272,40 +278,44 @@
             this.aLUMNOSBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.aLUMNOSBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("aLUMNOSBindingNavigatorSaveItem.Image")));
             this.aLUMNOSBindingNavigatorSaveItem.Name = "aLUMNOSBindingNavigatorSaveItem";
-            this.aLUMNOSBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
+            this.aLUMNOSBindingNavigatorSaveItem.Size = new System.Drawing.Size(24, 24);
             this.aLUMNOSBindingNavigatorSaveItem.Text = "Guardar datos";
             this.aLUMNOSBindingNavigatorSaveItem.Click += new System.EventHandler(this.aLUMNOSBindingNavigatorSaveItem_Click);
             // 
             // dniTextBox
             // 
             this.dniTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aLUMNOSBindingSource, "Dni", true));
-            this.dniTextBox.Location = new System.Drawing.Point(111, 91);
+            this.dniTextBox.Location = new System.Drawing.Point(83, 74);
+            this.dniTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dniTextBox.Name = "dniTextBox";
-            this.dniTextBox.Size = new System.Drawing.Size(207, 22);
+            this.dniTextBox.Size = new System.Drawing.Size(156, 20);
             this.dniTextBox.TabIndex = 4;
             // 
             // nombreTextBox
             // 
             this.nombreTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aLUMNOSBindingSource, "Nombre", true));
-            this.nombreTextBox.Location = new System.Drawing.Point(111, 119);
+            this.nombreTextBox.Location = new System.Drawing.Point(83, 97);
+            this.nombreTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(207, 22);
+            this.nombreTextBox.Size = new System.Drawing.Size(156, 20);
             this.nombreTextBox.TabIndex = 6;
             // 
             // apellidosTextBox
             // 
             this.apellidosTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aLUMNOSBindingSource, "Apellidos", true));
-            this.apellidosTextBox.Location = new System.Drawing.Point(111, 147);
+            this.apellidosTextBox.Location = new System.Drawing.Point(83, 119);
+            this.apellidosTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.apellidosTextBox.Name = "apellidosTextBox";
-            this.apellidosTextBox.Size = new System.Drawing.Size(207, 22);
+            this.apellidosTextBox.Size = new System.Drawing.Size(156, 20);
             this.apellidosTextBox.TabIndex = 8;
             // 
             // emailTextBox
             // 
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aLUMNOSBindingSource, "Email", true));
-            this.emailTextBox.Location = new System.Drawing.Point(111, 175);
+            this.emailTextBox.Location = new System.Drawing.Point(83, 142);
+            this.emailTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(207, 22);
+            this.emailTextBox.Size = new System.Drawing.Size(156, 20);
             this.emailTextBox.TabIndex = 10;
             // 
             // cboCurso
@@ -314,9 +324,10 @@
             this.cboCurso.DataSource = this.cURSOSBindingSource;
             this.cboCurso.DisplayMember = "Nombre_Curso";
             this.cboCurso.FormattingEnabled = true;
-            this.cboCurso.Location = new System.Drawing.Point(111, 203);
+            this.cboCurso.Location = new System.Drawing.Point(83, 165);
+            this.cboCurso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboCurso.Name = "cboCurso";
-            this.cboCurso.Size = new System.Drawing.Size(207, 24);
+            this.cboCurso.Size = new System.Drawing.Size(156, 21);
             this.cboCurso.TabIndex = 12;
             this.cboCurso.ValueMember = "Id_Curso";
             // 
@@ -338,17 +349,20 @@
             // fotoPictureBox
             // 
             this.fotoPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.aLUMNOSBindingSource, "Foto", true));
-            this.fotoPictureBox.Location = new System.Drawing.Point(338, 106);
+            this.fotoPictureBox.Location = new System.Drawing.Point(254, 86);
+            this.fotoPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fotoPictureBox.Name = "fotoPictureBox";
-            this.fotoPictureBox.Size = new System.Drawing.Size(217, 301);
+            this.fotoPictureBox.Size = new System.Drawing.Size(163, 245);
+            this.fotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fotoPictureBox.TabIndex = 14;
             this.fotoPictureBox.TabStop = false;
             // 
             // btnCambiar
             // 
-            this.btnCambiar.Location = new System.Drawing.Point(338, 77);
+            this.btnCambiar.Location = new System.Drawing.Point(254, 63);
+            this.btnCambiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCambiar.Name = "btnCambiar";
-            this.btnCambiar.Size = new System.Drawing.Size(75, 23);
+            this.btnCambiar.Size = new System.Drawing.Size(56, 19);
             this.btnCambiar.TabIndex = 16;
             this.btnCambiar.Text = "Cambiar";
             this.btnCambiar.UseVisualStyleBackColor = true;
@@ -387,9 +401,9 @@
             // 
             // administrarAlumnosForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 427);
+            this.ClientSize = new System.Drawing.Size(431, 347);
             this.Controls.Add(this.btnCambiar);
             this.Controls.Add(dniLabel);
             this.Controls.Add(this.dniTextBox);
@@ -405,6 +419,7 @@
             this.Controls.Add(this.fotoPictureBox);
             this.Controls.Add(this.aLUMNOSBindingNavigator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "administrarAlumnosForm";
             this.Text = "administrarAlumnosForm";
             this.Load += new System.EventHandler(this.administrarAlumnosForm_Load);

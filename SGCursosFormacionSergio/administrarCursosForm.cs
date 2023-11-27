@@ -204,6 +204,7 @@ namespace SGCursosFormacionSergio
                     {
                         btnEliminar.Enabled = true;
                         btnModificar.Enabled = true;
+                        
                     }
                 }
             }
@@ -224,11 +225,6 @@ namespace SGCursosFormacionSergio
                         // Instanciar el curso por su ID
                         curso = objDB.CURSOS.FirstOrDefault(x => x.Id_Curso == idCurso);
                     }
-                    else
-                    {
-                        // No hay una fila seleccionada, puedes manejar este caso según sea necesario
-                        MessageBox.Show("Ningún curso seleccionado");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -236,7 +232,5 @@ namespace SGCursosFormacionSergio
                 }
             }
         }
-
-
     }
 }

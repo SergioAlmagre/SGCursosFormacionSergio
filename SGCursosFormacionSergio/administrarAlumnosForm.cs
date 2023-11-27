@@ -81,6 +81,9 @@ namespace SGCursosFormacionSergio
             if (ofdCaratula.ShowDialog() == DialogResult.OK)
             {
                 fotoPictureBox.Image = Image.FromFile(ofdCaratula.FileName);
+                this.Validate();
+                this.aLUMNOSBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.dsDB);
             }
         }
 
@@ -97,7 +100,6 @@ namespace SGCursosFormacionSergio
             if (rs == DialogResult.Yes)
             {
                 dsDBTableAdapters.ALUMNOSTableAdapter alumnoAdapter = new dsDBTableAdapters.ALUMNOSTableAdapter();
-                dsDB alumnoConCurso = new dsDB();
 
                 // Check if the alumno has a related curso
                 bool alumnoHasCurso = false;
@@ -117,7 +119,6 @@ namespace SGCursosFormacionSergio
                     {
                         alumnoAdapter.DeleteByIdAlumno(idAlumno);
                         MessageBox.Show("Alumno borrado");
-                        alumnoHasCurso = false;
                         cargarDatos();
                     }
                 }
@@ -125,7 +126,6 @@ namespace SGCursosFormacionSergio
                 {
                     alumnoAdapter.DeleteByIdAlumno(idAlumno);
                     MessageBox.Show("Alumno borrado");
-                    alumnoHasCurso = false;
                     cargarDatos();
                 }
             }
